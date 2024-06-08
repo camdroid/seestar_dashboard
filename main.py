@@ -10,12 +10,14 @@ def all_logs():
     return filter_logs_by_event(None)
 
 def filter_logs_by_event(event_names=None):
+    # TODO: Update this to read infinitely from a file:
+    # https://www.dabeaz.com/generators/Generators.pdf
     if event_names is None:
         event_names = []
 
     skip_first_line = True
     events = []
-    with open('log_2024-06-06.txt') as f:
+    with open('m51_2024-06-06.txt') as f:
         data = f.readlines()
         data = data[9:]
         for line in data:
@@ -62,10 +64,10 @@ def graph_stuff(events):
     fig = px.line(df, x='timestamp', y=['stacked_frame', 'dropped_frame'])
 
     app.layout = html.Div(children=[
-        html.H1(children='Hello Dash'),
+        html.H1(children='Seestar Stacks'),
 
         html.Div(children='''
-            Dash: A web application framework for your data.
+            Stacks: Show prevalence of stacked vs dropped frames.
         '''),
 
         dcc.Graph(
